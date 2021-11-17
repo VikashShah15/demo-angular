@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="overlaybox_data">
+        <div class="row justify-content-center">
+            <h4 class="margintop30">Great news, your plan details is on your way. Please enter your details to get the
+                email copy.</h4>
+            <div class="user-profile-box">
+                <form [formGroup]="userProfileForm" (ngSubmit)="userProfileSubmit()" novalidate>
+                    <div class="upb-row">
+                        <input type="text" formControlName="name" placeholder=" Participant Name" /> <br>
+                        <span class="invalid"
+                            *ngIf="(userProfileForm.controls.name.touched || isSubmitted) && userProfileForm.controls.name.errors?.required">
+                            Participant Name is Mandatory.
+                        </span>
+                    </div>
+                    <div class="upb-row">
+                        <input type="text" formControlName="email" placeholder="Email" /> <br>
+                        <span class="invalid"
+                            *ngIf="(userProfileForm.controls.email.touched || isSubmitted) && userProfileForm.controls.email.errors?.required">
+                            Email Address is Mandatory.
+                        </span>
+                        <span class="invalid"
+                            *ngIf="(userProfileForm.controls.email.touched || isSubmitted) && userProfileForm.controls.email.errors?.pattern">
+                            Please Enter valid Email Address.
+                        </span>
+                    </div>
+                    <div class="upb-row">
+                        <input type="number" formControlName="zipcode" placeholder="PostCode" /> <br>
+                        <span class="invalid"
+                            *ngIf="(userProfileForm.controls.zipcode.touched || isSubmitted) && userProfileForm.controls.zipcode.errors?.required">
+                            PostCode is Mandatory.
+                        </span>
+                    </div>
+                    <div class="upb-button">
+                        <button class="pButton" type="submit" [disabled]="!userProfileForm.valid">Submit</button>
+                        <button class="pButton" [routerLink]="['/planparser/']">Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

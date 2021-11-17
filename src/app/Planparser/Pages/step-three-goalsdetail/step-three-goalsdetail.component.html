@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h4> Step 3/3 </h4>
+        </div>
+    </div>
+
+    <div class="col-6 plan-header-spacing">
+        <h3 *ngIf="goals">Verify Your Goals ({{goalIndex + 1}} of {{goals.length}})</h3>
+    </div>
+    <div class="col-6 text-right" *ngIf="goals">
+        <button class="btn btn-dark" [hidden]="goalIndex == 0" (click)="backOnPreviousGoal()"> < </button> &nbsp;
+        <button class="btn btn-dark" [hidden]="goalIndex + 1 == goals.length" (click)="nextGoal()"> > </button>
+    </div>
+</div>
+
+<br>
+<form [formGroup]="goalForm">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="GoalType">Goal Type</label>
+                                <select name="Goal" id="GoalType" formControlName="goalTypeId">
+                                    <option value=""></option>
+                                    <option *ngFor="let type of goalType" [value]="type.goalTypeId">{{type.title}}</option>
+                                </select>
+                                <span class="invalid" *ngIf="(goalForm.controls.goalTypeId.touched|| isSubmitted)  && goalForm.controls.goalTypeId.errors?.required">
+                                    {{validationConstants.GoalTypeRequired}}
+                             </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="goalRelatesType">Goal Relates To</label>
+                                <select name="relatesType" id="goalRelatesType" formControlName="goalRelatesToId">
+                                    <option value=""></option>
+                                    <option *ngFor="let i of relatesType" [value]="i.goalRelatesToId">{{i.title}}</option>
+                                </select>
+                                <span class="invalid" *ngIf="(goalForm.controls.goalRelatesToId.touched|| isSubmitted)  && goalForm.controls.goalRelatesToId.errors?.required">
+                                    {{validationConstants.GoalRelatesRequired}}
+                             </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea name="achieveGoal" cols="45" rows="3" placeholder="Description" formControlName="description" class="form-control" maxlength="5000"></textarea>
+                        <span class="invalid" *ngIf="(goalForm.controls.description.touched|| isSubmitted)  && goalForm.controls.description.errors?.required">
+                               {{validationConstants.DescriptionRequired}}
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="How is this achieved">How is this achieved?</label>
+                        <textarea name="achieveGoal" cols="45" rows="3" placeholder="Enter your achievement stories" formControlName="fundingSource" class="form-control" maxlength="5000"></textarea>
+                        <span class="invalid" *ngIf="(goalForm.controls.fundingSource.touched|| isSubmitted)  && goalForm.controls.fundingSource.errors?.required">
+                            {{validationConstants.AchieveGoalRequired}}
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="How is this supported">How is this supported?</label>
+                        <textarea name="supportGoal" cols="45" rows="3" placeholder="Enter how is this supported?" formControlName="achievementMethod" class="form-control" maxlength="5000"></textarea>
+                        <span class="invalid" *ngIf="(goalForm.controls.achievementMethod.touched|| isSubmitted)  && goalForm.controls.achievementMethod.errors?.required">
+                            {{validationConstants.SupportGoalRequired}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            <button class="btn btn-light" [routerLink]="['/planparser/step-two-budgetdetail', planId]">Previous</button> &nbsp;
+            <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="updateGoal()">
+                Save & Continue      <span [ngClass]="{'spinner':loading===true}"></span></button>
+        </div>
+    </div>
+</form>
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

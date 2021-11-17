@@ -1,0 +1,107 @@
+.invalid {
+    color: red;
+}
+
+.agreebtn:disabled,
+.agreebtn[disabled] {
+    width: 150px;
+    background: lightgray;
+    border: 2px solid lightgray !important;
+    outline: none !important;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.user-profile-box {
+    width: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile-box form {
+    width: 500px;
+}
+
+.upb-row {
+    width: 100%;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.upb-row input {
+    width: 100%;
+    height: 44px;
+    padding-left: 15px;
+}
+
+.upb-button {
+    display: flex;
+    width: 100%;
+    float: left;
+    justify-content: space-evenly;
+    margin-top: 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.upb-button button {
+    width: 40%;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.upb-back {
+    background: lightgray;
+    border: 2px solid lightgray !important;
+}
+
+.upb-back:hover {
+    color: lightgray !important;
+    background: #fff;
+}
+
+.upb-submit {
+    background: #da1a5d;
+    border: 2px solid #da1a5d !important;
+}
+
+.upb-submit:hover {
+    color: #da1a5d !important;
+    background: #fff;
+}
+
+.margintop30 {
+    margin-top: 30px;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+}
+
+.pButton {
+    height: 30px;
+    width: 90px;
+    color: #fff;
+    background-color: #da1a5d;
+    border: 0;
+    opacity: 1;
+    margin-top: 10px;
+    border-radius: 0.1875rem;
+}
+
+.pButton:hover {
+    background-color: #ee1f67;
+}

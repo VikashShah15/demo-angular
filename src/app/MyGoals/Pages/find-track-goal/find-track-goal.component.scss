@@ -1,0 +1,20 @@
+p {
+    font-size: 16px;
+}
+
+.row-options i {
+    width: 25px;
+    height: 25px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 20px;
+    color: #13213d;
+}
+
+.text-center {
+    text-align: center;
+}

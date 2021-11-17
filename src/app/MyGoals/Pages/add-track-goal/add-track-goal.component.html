@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h3>{{trackGoalTitle}} </h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card overflow-y">
+            <div class="card-body">
+                <div class="form-group" *ngIf="goalData">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="GoalType">Goal Type</label>
+                            <h4>
+                                {{fetchGoalType(goalData.goalTypeId)}}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Details</label>
+                            <p>
+                                {{goalData.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample" [formGroup]="addTrackGoalForm">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group buttonsize">
+                                <label for="quantity">Date</label>
+                                <p-calendar [showIcon]="true" inputId="birthdaytime" formControlName="goalTrackingDate" dateFormat="dd-mm-yy"></p-calendar>
+                                <span class="invalid" *ngIf="(addTrackGoalForm.controls.goalTrackingDate.touched || isSubmitted)  && addTrackGoalForm.controls.goalTrackingDate.errors?.required">
+                                    {{validationConstants.GoalTrackingDateRequired}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="subTotalPrice">How am I performing?</label>
+                                <select class="form-control" formControlName="performanceScore">
+                                    <option value="1">1 - not satisfied</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5"> 5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10 - fully satisfied</option>
+                                </select>
+                                <span class="invalid" *ngIf="(addTrackGoalForm.controls.performanceScore.touched || isSubmitted)  && addTrackGoalForm.controls.performanceScore.errors?.required">
+                                    {{validationConstants.PerformanceScoreRequired}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="subTotalPrice">How satisfied am I?</label>
+                                <select class="form-control" formControlName="satisfactionScore">
+                                    <option value="1">1 - not satisfied</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5"> 5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10 - fully satisfied</option>
+                                </select>
+                                <span class="invalid" *ngIf="(addTrackGoalForm.controls.satisfactionScore.touched || isSubmitted)  && addTrackGoalForm.controls.satisfactionScore.errors?.required">
+                                    {{validationConstants.SatisfactionScoreRequired}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="totalPrice">Detailed activity for my goal</label>
+                                <textarea name="trackGoal" cols="45" rows="3" formControlName="description" class="form-control"></textarea>
+                                <span class="invalid" *ngIf="(addTrackGoalForm.controls.description.touched || isSubmitted)  && addTrackGoalForm.controls.description.errors?.required">
+                                    {{validationConstants.DescriptionRequired}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-right">
+        <button class="btn btn-light" [routerLink]="['/my-goal/track-my-goal/',goalId]">Cancel</button> &nbsp;
+        <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="saveTrackGoal()">
+            Save <span [ngClass]="{'spinner':loading===true}"></span></button>
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

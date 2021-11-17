@@ -1,0 +1,124 @@
+<div class="container" *ngIf="planId == '' &&  Loader===false">
+    <div class="overlaybox_data">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card padding-card text-center">
+                    <h3>
+                        You don't have any active Plan, Please upload your Plan.
+                    </h3>
+                    <br />
+                    <br />
+                    <div>
+                        <a class="btn btn-primary" [routerLink]="['/planparser', 'new-pdf-upload']"> Upload New Plan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="planId != '' &&  Loader===false">
+    <h5 style="font-size: 30px;" *ngIf="planData">
+        {{planData.participantName | titlecase}}'s NDIS Plan Summary
+    </h5>
+    <div class="overlaybox_data" style="padding: 0 !important;">
+        <div class="row">
+            <div class="col-lg-6 mt-4">
+                <a href="javascript:void(0);" [routerLink]="['/planparser/view-plan', planId]" (click)="gotoPlanData()">
+                    <div class="card padding-card">
+                        <h5 class="text-center a-color">Plan Progress</h5>
+                        <div class="chart-date-box">
+                            <p-progressBar [value]="value" [showValue]="false"></p-progressBar>
+                            <div class="startdate-enddate-row a-color">
+                                <span>{{startDate | date:'dd-MM-yyyy'}}</span>
+                                <span>{{endDate | date:'dd-MM-yyyy'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 mt-4" *ngIf="budget && budget.length > 0">
+                <div class="card padding-card">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="text-center">Budget</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p-chart type="pie" [data]="data" [height]="250"></p-chart>
+                        </div>
+                        <div class="col-lg-6">
+                            <p-chart type="bar" [data]="dataSet" [height]="250" [options]="{
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }"></p-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4" *ngIf="budget && budget.length === 0">
+                <div class="card padding-card" style="height: 100%;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="text-center" style="padding-top: 20px;">You don't have budget for active plan. Please add budget</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="margin-top: 50px;text-align: center;">
+                            <a class="btn btn-outline-dark" [routerLink]="['/planparser/step-two-budgetdetail', planId]">Add Budget Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlaybox_data" style="padding: 0 !important;">
+        <div class="row">
+            <div class="col-lg-3 mt-4">
+                <a href="javascript:void(0);" [routerLink]="['/invoices']" (click)="redirectToInvoice()">
+                    <div class="card padding-card text-center">
+                        <svg-icon src="./assets/images/ic_invoice.svg"></svg-icon><br>
+                        <h5 class="a-color">Invoices</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 mt-4">
+                <a href="javascript:void(0);" [routerLink]="['/my-goal/find-track-goal']" (click)="redirectToGoals()">
+                    <div class="card padding-card text-center">
+                        <svg-icon src="./assets/images/goal.svg"></svg-icon><br>
+                        <h5 class="a-color">Goals</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 mt-4">
+                <a href="javascript:void(0);" [routerLink]="['appointments']" (click)="redirectToAppointments()">
+                    <div class="card padding-card text-center">
+                        <svg-icon src="./assets/images/appointments.svg"></svg-icon><br>
+                        <h5 class="a-color">Appointments</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 mt-4">
+                <a href="javascript:void(0);" [routerLink]="['my-service-provider']" (click)="redirectToMyserviceProvider()">
+                    <div class="card padding-card text-center">
+                        <svg-icon src="./assets/images/service_providers.svg"></svg-icon><br>
+                        <h5 class="a-color">My Service Providers</h5>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="Loader" style="padding-top:25px">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

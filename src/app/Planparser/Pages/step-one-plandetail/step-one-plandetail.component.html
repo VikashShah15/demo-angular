@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h4 *ngIf="returnUrl === undefined || returnUrl === null && newPlan===false">Step 1/{{step}} </h4>
+        </div>
+        <div class="plan-header-spacing">
+            <h3>{{planDetailsTitle}} </h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample" [formGroup]="PlanForm">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="name">Participant Name</label>
+                                <input type="text" class="form-control" id="name" formControlName="participantName" placeholder="Enter Participant Name">
+                                <span class="invalid" *ngIf="(PlanForm.controls.participantName.touched|| isSubmitted)  && PlanForm.controls.participantName.errors?.required">
+                                    {{validationConstants.ParticipantNameRequired}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group buttonsize">
+                                <label class="p-col-56" for="sdate">Start Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="sdate" formControlName="startDate" (onSelect)="compareStartDates()" dateFormat="dd-mm-yy" inputStyleClass="form-control"></p-calendar>
+                                <span class="invalid" *ngIf="(PlanForm.controls.startDate.touched|| isSubmitted)  && PlanForm.controls.startDate.errors?.required">
+                                    {{validationConstants.StartDateRequired}}
+                                </span>
+                                <span *ngIf="errorForStartDate.isError" class="invalid">
+                                    {{ errorForStartDate.errorMessage }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group buttonsize">
+                                <label class="p-col-56" for="edate">End Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="edate" formControlName="endDate" (onSelect)="compareEndDates()" dateFormat="dd-mm-yy" inputStyleClass="form-control">
+                                </p-calendar>
+                                <span class="invalid" *ngIf="(PlanForm.controls.endDate.touched|| isSubmitted)  && PlanForm.controls.endDate.errors?.required">
+                                    {{validationConstants.EndDateRequired}}
+                                </span>
+                                <span *ngIf="errorForEndDate.isError" class="invalid">
+                                    {{ errorForEndDate.errorMessage }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="ndisnumber">NDIS Number</label>
+                                <input type="text" class="form-control" id="ndisnumber" formControlName="ndisNumber">
+                                <span class="invalid" *ngIf="(PlanForm.controls.ndisNumber.touched|| isSubmitted)  && PlanForm.controls.ndisNumber.errors?.required">
+                                    {{validationConstants.NdisNumberRequired}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group" *ngIf="newPlan===false">
+                                <label for="planid">Plan ID</label>
+                                <input type="text" class="form-control" id="planid" formControlName="displayId" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group buttonsize">
+
+                                <label class="p-col-56" for="planreviewdate">Plan Review Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="planreviewdate" dateFormat="dd-mm-yy" formControlName="reviewDate" inputStyleClass="form-control"></p-calendar><br>
+                                <span class="invalid" *ngIf="(PlanForm.controls.reviewDate.touched|| isSubmitted)  && PlanForm.controls.reviewDate.errors?.required">
+                                    {{validationConstants.PlanReviewDateRequired}}
+                                </span>
+                                <span class="invalid" *ngIf="(PlanForm.controls.reviewDate.touched|| isSubmitted)  && PlanForm.controls.reviewDate.errors?.compare">
+                                    {{validationConstants.ReviewDateStartDateCompare}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group buttonsize">
+                                <label class="p-col-56" for="birthdate">Birth Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="birthdate" formControlName="birthDate" dateFormat="dd-mm-yy" inputStyleClass="form-control"></p-calendar><br>
+                                <span class="invalid" *ngIf="(PlanForm.controls.birthDate.touched|| isSubmitted)  && PlanForm.controls.birthDate.errors?.required">
+                                    {{validationConstants.BirthDateRequired}}
+                                </span>
+                                <span class="invalid" *ngIf="PlanForm.controls.birthDate.hasError('greater')">
+                                    {{validationConstants.BirthdateNotGreater}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="budget">Total NDIS Budget</label>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">$</span>
+                                    <input type="number" class="form-control" id="budget" [value]="PlanForm.get('totalBudget').value" formControlName="totalBudget">
+                                </div>
+                                <span class="invalid" *ngIf="(PlanForm.controls.totalBudget.touched|| isSubmitted)  && PlanForm.controls.totalBudget.errors?.required">
+                                    {{validationConstants.TotalBudgetRequired}}
+                                </span>
+                                <span class="invalid" *ngIf="PlanForm.get('totalBudget').value < 0">
+                                    {{validationConstants.BudgetGreaterThanZero}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter Your Address" maxlength="5000" />
+                                <span class="invalid" *ngIf="(PlanForm.controls.address.touched|| isSubmitted)  && PlanForm.controls.address.errors?.required">
+                                    {{validationConstants.AddressRequired}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="postCode">Post Code</label>
+                                <input type="number" class="form-control" id="postCode" formControlName="postCode" maxlength="4" placeholder="Post Code" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                    min="0">
+                                <span class="invalid" *ngIf="(PlanForm.controls.postCode.touched|| isSubmitted)  && PlanForm.controls.postCode.errors?.required">
+                                    {{validationConstants.ZipCodeRequired}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="aboutme">About Me</label>
+                                <textarea class="form-control" id="aboutme" formControlName="aboutMe" placeholder="Enter About You" rows=5 maxlength="10000"></textarea>
+                                <span class="invalid" *ngIf="(PlanForm.controls.aboutMe.touched|| isSubmitted)  && PlanForm.controls.aboutMe.errors?.required">
+                                    {{validationConstants.AboutRequired}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="familyandfriends">Family and Friends</label>
+                                <textarea class="form-control" id="familyandfriends" formControlName="familyAndFriends" placeholder="Family and Friends" rows=5 maxlength="5000"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="familyandfriends">Services and Community Involvement</label>
+                                <textarea class="form-control" id="familyandfriends" formControlName="serviceCommunity" placeholder="Services and Community Involvement" rows=5 maxlength="5000"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-right">
+        <button [hidden]="btnShow" class="btn btn-light" [routerLink]="['/planparser/view-plan', planId]">Cancel</button> &nbsp;
+        <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="planDetailSubmit()">
+            Save & Continue <span [ngClass]="{'spinner':loading===true}"></span></button>
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

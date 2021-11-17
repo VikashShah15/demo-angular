@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">{{documentTitle}}</h6>
+                <form class="forms-sample" [formGroup]="addDocumentForm">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Title</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" formControlName="title">
+                        <span class="invalid" *ngIf="(addDocumentForm.controls.title.touched || isSubmitted)  && addDocumentForm.controls.title.errors?.required">
+                            {{validationConstants.TitleRequired}}
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="documentTypeId">Document Type</label>
+                        <select name="category" id="documentTypeId" formControlName="documentTypeId">
+                            <option *ngFor="let i of documentType" [value]="i.documentTypeId">{{i.name}}</option>
+                        </select>
+                        <span class="invalid" *ngIf="(addDocumentForm.controls.documentTypeId.touched || isSubmitted)  && addDocumentForm.controls.documentTypeId.errors?.required">
+                            {{validationConstants.DocumentTypeRequired}}
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" formControlName="description" maxlength="400" rows="3">
+                </textarea>
+                        <span class="invalid" *ngIf="(addDocumentForm.controls.description.touched || isSubmitted)  && addDocumentForm.controls.description.errors?.required">
+                            {{validationConstants.DescriptionRequired}}
+                        </span>
+                    </div>
+                    <div class="form-group buttonsize">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="p-col-56" for="sdate">Start Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="sdate" formControlName="startDate" inputStyleClass="form-control" (onSelect)="compareStartDates()" dateFormat="dd-mm-yy"></p-calendar><br>
+                                <span *ngIf="errorForStartDate.isError" class="invalid">
+                                    {{ errorForStartDate.errorMessage }}
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="p-col-56" for="edate">End Date</label><br>
+                                <p-calendar [showIcon]="true" inputId="edate" formControlName="endDate" inputStyleClass="form-control" (onSelect)="compareEndDates()" dateFormat="dd-mm-yy">
+                                </p-calendar><br>
+                                <span *ngIf="errorForEndDate.isError" class="invalid">
+                                    {{ errorForEndDate.errorMessage }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="p-col-56">Select File</label>
+                        <div style="display: flex;
+                        align-items: center;" class="padding-8">
+                            <p-fileUpload name="myfile[]" #form chooseIcon="pi pi-upload" url="./upload.php" [disabled]="disableUpload" chooseLabel="Browse" mode="basic" customUpload="true" accept=".pdf,.docx, .doc,.csv, .xls, .xlsx, .jpeg, .jpg, .png, .ppt, .pptx, .rtf, .txt" (uploadHandler)="handleInputChange($event, form)"
+                                [auto]="true">
+                            </p-fileUpload>
+                            <div class="spinner-border" style="position: relative;" role="status" *ngIf="Loader">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="addDocumentForm.controls.filePath!==null">
+                            <span>{{addDocumentForm.controls.filePath.value}}</span>
+                        </ng-container>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-right">
+        <button class="btn btn-light" [routerLink]="['/my-document']">Cancel</button> &nbsp;
+        <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="documentSubmit()">
+            Save <span [ngClass]="{'spinner':loading===true}"></span> </button>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-right"></p-toast>

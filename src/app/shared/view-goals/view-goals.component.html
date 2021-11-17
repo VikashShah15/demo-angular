@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h4> Step 3/3 </h4>
+        </div>
+    </div>
+
+    <div class="col-6 plan-header-spacing">
+        <h3>Verify Your Goals (1/5)</h3>
+    </div>
+</div>
+<div class="row" style="height: 650px;border-radius: 10px;">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <form [formGroup]="goalsForm" (ngSubmit)="goalSubmit()">
+                <div formArrayName="details">
+                    <div class="card-body">
+                        <label for="GoalType">Goal Type</label>
+                        <select name="type" id="GoalType" formControlName="type" style="width: 50%;border-radius: 5px;">
+                            <option selected="selected" value="Short Term">Short Term</option>
+                            <option value="Long Term">Long Term</option>
+                            <option value="Medium to Long Term">Medium to Long Term</option>
+                        </select>
+                        <span class="invalid" *ngIf="(goalsForm.controls.type.touched|| isSubmitted)  && goalsForm.controls.type.errors?.required">
+                            {{validationConstants.GoalTypeRequired}}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <label for="Description">Description</label>
+                        <textarea name="description" cols="45" rows="3" placeholder="Description" formControlName="description" style="width: 100%;border-radius: 5px;"></textarea>
+                        <span class="invalid" *ngIf="(goalsForm.controls.description.touched|| isSubmitted)  && goalsForm.controls.description.errors?.required">
+                        {{validationConstants.DescriptionRequired}}
+                    </span>
+                    </div>
+                    <div class="card-body">
+                        <label for="How is this achieved">How is this achieved?</label>
+                        <textarea name="achieveGoal" cols="45" rows="3" placeholder="Enter your achievement stories" formControlName="achieveGoal" style="width: 100%;border-radius: 5px;"></textarea>
+                        <span class="invalid" *ngIf="(goalsForm.controls.achieveGoal.touched|| isSubmitted)  && goalsForm.controls.achieveGoal.errors?.required">
+                        {{validationConstants.AchieveGoalRequired}}
+                    </span>
+                    </div>
+                    <div class="card-body">
+                        <label for="How is this supported">How is this supported?</label>
+                        <textarea name="supportGoal" cols="45" rows="3" placeholder="Enter how is this supported?" formControlName="supportGoal" style="width: 100%;border-radius: 5px;"></textarea>
+                        <span class="invalid" *ngIf="(goalsForm.controls.supportGoal.touched|| isSubmitted)  && goalsForm.controls.supportGoal.errors?.required">
+                        {{validationConstants.SupportGoalRequired}}
+                    </span>
+                    </div>
+                    <div>
+                        <button type="submit" class="pButton">Next Goal</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12" style="margin-left: 906px;">
+
+    <button class="plbtn">Prev</button>
+    <button class="pbtn" style="margin-left: 20px;">Save & Continue</button>
+
+</div>
+<p-toast position="top-right"></p-toast>

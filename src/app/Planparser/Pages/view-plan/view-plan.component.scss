@@ -1,0 +1,71 @@
+.budget-rows {
+    padding-bottom: 20px;
+}
+
+.budget-rows h4 {
+    color: #13213d;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.budget-box {
+    border: 1px #c1c1c1 solid;
+    border-radius: 5px;
+    width: 100%;
+    margin: 14px;
+}
+
+.total-box {
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    margin: 14px;
+    padding: 10px 10px 10px 10px;
+}
+
+.spiner-overly {
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    left: 0;
+    height: 100%;
+    float: left;
+    position: absolute;
+    background: #000;
+    opacity: 0.25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid #13213d;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+    color: #13213d;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.rediect-buttons button {
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.total-color {
+    color: #da1a5d !important;
+}
+
+.goal-rows {
+    padding: 0px 0px 20px 25px;
+}
+
+.rows {
+    padding: 0px 0px 20px 13px;
+}

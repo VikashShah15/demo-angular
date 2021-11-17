@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center" *ngIf="redirectProgress" style="padding-top:25px">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<section class="section" *ngIf="redirectProgress != true">
+    <div class="col-lg-6 text-right" style="margin-top:8px; float:right" *ngIf="activeplan">
+        <button class="btn btn-dark" (click)="redirectViewPlan()">Back to Active Plan </button>
+    </div>
+    <div class="planparser_page">
+        <div class="pp_button_row" style="padding: 24px 0;">
+            <img src="assets/images/upload_pdf.svg" style="width: 96px;height: 96px;" />
+        </div>
+        <div style="padding-bottom: 24px;">
+            <div class="container">
+                <div class="pp_button_row pp_dis_flex pp_flexdir_col">
+                    <div class="pp_button_box">
+                        <p-fileUpload #form name="myfile[]" chooseIcon="pi pi-upload" chooseLabel="Upload NDIS PDF File" mode="basic" customUpload="true" accept=".pdf" (uploadHandler)="handleInputChange($event,form)" [auto]="true" [disabled]="Loader===1" styleClass="fileupload">
+                        </p-fileUpload>
+
+                    </div>
+                    <div class="pp-or-button" *ngIf="Loader!==1">
+                        <span>OR</span>
+                    </div>
+                    <div *ngIf="Loader!==1">
+
+                        <a class="btn btn-outline-dark btn_width_300" [routerLink]="['/planparser/new-plandetail']">
+                            Create Plan Manually</a>
+                    </div>
+                </div>
+                <div class="invalid"> <span *ngIf="ErrorMsg!='' || ErrorMsg!=undefined">{{ErrorMsg}}</span>
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px" *ngIf="Loader===0 && ErrorMsg==='' && redirectProgress != true">
+                    <p style="font-size: 16px;">
+                        {{validationConstants.PdfMessage}}</p>
+
+                    <p style="font-size: 16px;">
+                        {{validationConstants.PlanAutomaticallyDelete}}
+
+                    </p>
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px;" *ngIf="iconAndMsgShow===1 && ErrorMsg===''">
+                    <p style="font-size: 16px;padding: 10px;"><i *ngIf="fileProgressStatus === 1" class='fa fa-hourglass-end'></i>
+                        <i *ngIf="iconShow===1 || iconShow===2 || iconShow===3 || iconShow===4 || iconShow === 5" class="fa fa-check fa-color" aria-hidden="true"></i> {{validationConstants.AnalysePlan}}
+                    </p>
+
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px;" *ngIf="iconAndMsgShow===1 && ErrorMsg===''">
+                    <p style="font-size: 16px;padding: 10px;"><i *ngIf="fileProgressStatus === 2" class='fa fa-hourglass-end '></i>
+                        <i *ngIf="iconShow===2 || iconShow===3 || iconShow===4 || iconShow === 5" class="fa fa-check fa-color" aria-hidden="true"></i> {{validationConstants.IdentifyDetails}}
+                    </p>
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px;" *ngIf="iconAndMsgShow===1 && ErrorMsg===''">
+                    <p style="font-size: 16px;padding: 10px;"><i *ngIf="fileProgressStatus === 3" class='fa fa-hourglass-end'></i><i *ngIf="iconShow===3 || iconShow===4 || iconShow === 5" class="fa fa-check fa-color" aria-hidden="true"></i> {{validationConstants.PersonalInformation}}
+                    </p>
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px;" *ngIf="iconAndMsgShow===1 && ErrorMsg===''">
+                    <p style="font-size: 16px;padding: 10px;"><i *ngIf="fileProgressStatus === 4" class='fa fa-hourglass-end'></i><i *ngIf="iconShow===4 || iconShow === 5" class="fa fa-check fa-color" aria-hidden="true"></i> {{validationConstants.GoalUnderstand}}
+                    </p>
+                </div>
+                <div class="container" style="text-align: center; padding-top:25px;" *ngIf="iconAndMsgShow===1 && ErrorMsg===''">
+                    <p style="font-size: 16px;padding: 10px;"><i *ngIf="fileProgressStatus === 5" class='fa fa-hourglass-end'></i><i *ngIf="iconShow===5" class="fa fa-check fa-color" aria-hidden="true"></i> {{validationConstants.PlanExtract}}
+                    </p>
+                </div>
+
+
+                <div class="d-flex justify-content-center" *ngIf="Loader===1 && ErrorMsg==='' && redirectProgress != true" style="padding-top:25px">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p-toast position="top-right"></p-toast>

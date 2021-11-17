@@ -1,0 +1,41 @@
+<div class="col-md-20">
+    <div class="col-md-25">
+        <h5 style="padding-bottom: 10px;">Profile</h5>
+        <form class="forms-sample" [formGroup]="profileForm">
+            <div class="form-group">
+                <label for="exampleInputUsername1">First Name</label>
+                <input type="text" class="form-control" id="exampleInputUsername1" placeholder="First Name" formControlName="firstName">
+                <span class="invalid" *ngIf="profileForm.controls.firstName.touched  && profileForm.controls.firstName.errors?.required">
+                    {{validationConstants.FirstNameRequired}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Last Name</label>
+                <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Last Name" formControlName="lastName">
+                <span class="invalid" *ngIf="profileForm.controls.lastName.touched  && profileForm.controls.lastName.errors?.required">
+                    {{validationConstants.LastNameRequired}}
+                </span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Phone Number (Optional)</label>
+                <input type="number" class="form-control" id="exampleInputUsername1" placeholder="Phone Number" formControlName="phoneNumber">
+                <span class="invalid" *ngIf="profileForm.controls.phoneNumber.touched  && profileForm.controls.phoneNumber.errors?.pattern">
+                    {{validationConstants.PhonePattern}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Email</label>
+                <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Email" formControlName="email" readonly>
+
+            </div>
+
+            <div>
+                <button class="pButton" type="submit" (click)="userProfileSubmit()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

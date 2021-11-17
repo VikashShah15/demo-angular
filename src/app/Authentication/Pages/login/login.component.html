@@ -1,0 +1,53 @@
+<div class="main-wrapper">
+    <div class="page-wrapper full-page">
+        <div class="page-content d-flex align-items-center justify-content-center">
+            <div class="row w-100 mx-0 auth-page">
+                <div class="col-md-8 col-xl-6 mx-auto">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-12 pl-md-0">
+                                <div class="auth-form-wrapper px-4 py-5">
+                                    <a href="javascript:void(0);" class="noble-ui-logo d-block mb-2" style="width: 100px;">
+                                        <img src="assets/images/angularlogo.png" />
+                                    </a>
+                                    <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.
+                                    </h5>
+                                    <form class="forms-sample" [formGroup]="loginForm">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email Address</label>
+                                            <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" placeholder="Email">
+                                            <span class="invalid" *ngIf="(loginForm.controls.email.touched || isSubmitted) && loginForm.controls.email.errors?.required">
+                                                {{validationConstants.EmailAddressRequired}}
+                                            </span>
+                                            <span class="invalid" *ngIf="(loginForm.controls.email.touched || isSubmitted)  && loginForm.controls.email.errors?.pattern">
+                                                {{validationConstants.EmailPattern}}
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+                                            <span class="invalid" *ngIf="(loginForm.controls.password.touched || isSubmitted) && loginForm.controls.password.errors?.required">
+                                                {{validationConstants.PasswordRequired}}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" (click)="userLogin()">Login</button>
+                                        </div>
+                                    </form>
+                                    <div>
+                                        <a [routerLink]="['/authorize/forget-password']" class="d-block mt-3 text-muted" style="padding-top: 20px!important;">Forgot
+                                        Password?</a>
+                                        <a [routerLink]="['/authorize/register']" class="d-block mt-3 text-muted">Not a user?
+                                        Sign
+                                        up</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

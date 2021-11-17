@@ -1,0 +1,301 @@
+<div class="row" *ngIf="loader===false">
+    <div class="col-6 plan-header-spacing" *ngIf="planData != undefined">
+        <h3>{{planData.participantName | titlecase}}'s Active Plan</h3>
+    </div>
+    <div class="col-6 text-right" *ngIf="loader===false">
+        <a class="btn btn-dark" href="javascript:void(0);" (click)="redirectToUploadNewPlan()"><i class="fa fa-upload"
+                aria-hidden="true"></i> Upload New Plan</a>
+    </div>
+
+</div>
+<div class="row" *ngIf="planData != undefined && loader===false">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body active-plan-details">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="plan-header-spacing">
+                            <h4>Plan Details</h4>
+                        </div>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a class="btn btn-outline-dark" [routerLink]="['/planparser/step-one-plandetail', planId]" [queryParams]="{ returnURL: 'planparser/view-plan/'+ planId }"><i class="fa fa-pencil"
+                                aria-hidden="true"></i> Edit Plan</a>
+                    </div>
+                </div>
+                <div class="row" style="text-align: left;">
+                    <div class="col-lg-12">
+                        <div class="p-field-checkbox">
+                            <p-checkbox binary="true" [(ngModel)]="showPersonalDetail" (onChange)="changeShowPersonalDetail($event.checked)"></p-checkbox>
+                            <label class="lbl-details">Show Personal Detail </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="name">Participant Name</label><br>
+                            <p>
+                                {{planData.participantName | asterisk:showPersonalDetail}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="sdate">Start Date</label><br>
+                            <p *ngIf="planData.startDate">{{planData.startDate|date:'dd-MM-yyyy'| asterisk:showPersonalDetail}}</p>
+                            <!-- <p-calendar [showIcon]="true" inputId="sdate" formControlName="startdate" inputStyleClass="form-control"></p-calendar> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="edate">End Date</label><br>
+                            <p *ngIf="planData.endDate">{{planData.endDate|date:'dd-MM-yyyy' | asterisk:showPersonalDetail}}</p>
+                            <!-- <p-calendar [showIcon]="true" inputId="edate" formControlName="enddate" inputStyleClass="form-control"></p-calendar> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="ndisnumber">NDIS Number</label>
+                            <p>{{planData.ndisNumber | asterisk:showPersonalDetail}}</p>
+
+                            <p></p>
+                            <!-- <input type="text" class="form-control" id="ndisnumber" formControlName="ndisNumber"> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="planid">Plan ID</label>
+                            <p *ngIf="planData.displayId">{{planData.displayId.toString() | asterisk:showPersonalDetail}}</p>
+                            <!-- <input type="text" class="form-control" id="planid" formControlName="planId"> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group buttonsize">
+
+                            <label class="p-col-56" for="planreviewdate">Plan Review Date</label><br>
+                            <p *ngIf="planData.reviewDate">{{planData.reviewDate|date:'dd-MM-yyyy' | asterisk:showPersonalDetail}}</p>
+                            <!-- <p-calendar [showIcon]="true" inputId="planreviewdate" formControlName="planReviewDate" inputStyleClass="form-control"></p-calendar><br> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="birthdate">Birth Date</label><br>
+                            <p *ngIf="planData?.birthDate!==null">{{planData.birthDate|date:'dd-MM-yyyy' | asterisk:showPersonalDetail}}</p>
+                            <!-- <p-calendar [showIcon]="true" inputId="birthdate" formControlName="birthDate" inputStyleClass="form-control"></p-calendar><br> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="budget">Total Budget</label>
+                            <p>{{planData.totalBudget | currency | asterisk:showPersonalDetail}}</p>
+                            <!-- <p *ngIf="budget.length > 0">{{totalBudget | currency | asterisk:showPersonalDetail}}</p> -->
+                            <!-- <div class="p-inputgroup"> 
+                                <span class="p-inputgroup-addon">$</span>
+                                <input type="text" class="form-control" id="budget" formControlName="budget">
+
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <p *ngIf="planData?.address!==null">{{planData.address | asterisk:showPersonalDetail}}</p>
+                            <!-- <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter Your Address" /> -->
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="postCode">Post Code</label>
+                            <p *ngIf="planData.postCode && planData.postCode!==0">{{planData.postCode.toString() | asterisk:showPersonalDetail}}</p>
+                            <!-- <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter Your Address" /> -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="aboutme">About Us</label>
+                            <p *ngIf="planData.aboutMe!==null">{{planData.aboutMe | asterisk:showPersonalDetail}}</p>
+                            <!-- <textarea class="form-control" id="aboutme" formControlName="about" placeholder="Enter About You"></textarea> -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="familyandfriends">Family and Friends</label>
+                            <p *ngIf="planData.familyAndFriends!==null">{{planData.familyAndFriends | asterisk:showPersonalDetail}}</p>
+                            <!-- <textarea class="form-control" id="familyandfriends" formControlName="family" placeholder="Family and Friends"></textarea> -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="serviceCommunity">Services and Community Involvement</label>
+                            <p *ngIf="planData.serviceCommunity!==null">{{planData.serviceCommunity | asterisk:showPersonalDetail}}</p>
+                            <!-- <textarea class="form-control" id="familyandfriends" formControlName="services" placeholder="Services and Community Involvement"></textarea> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="loader===false">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body active-plan-details">
+                <div class="row">
+                    <div class="col-6 plan-header-spacing text-left">
+                        <h4>Budget Details </h4>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a *ngIf="budget && budget.length > 0" class="btn btn-outline-dark" [routerLink]="['/planparser/step-two-budgetdetail', planId]" [queryParams]="{ returnURL: 'planparser/view-plan/'+ planId }"><i class="fa fa-pencil"></i>
+                            Edit Budget</a>
+                        <a *ngIf="budget && budget.length === 0" class="btn btn-outline-dark" [routerLink]="['/planparser/step-two-budgetdetail', planId]" [queryParams]="{ returnURL: 'planparser/view-plan/'+ planId }">
+                            Add Budget</a>
+                    </div>
+                </div>
+                <ng-container *ngIf="budget && budget.length > 0">
+                    <div class="row budget-rows" *ngFor="let bud of budget">
+                        <div class="col-lg-12">
+                            <h4>{{bud.category}}</h4>
+                        </div>
+                        <div class="budget-box">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="category">Category</label>
+                                            <p>{{bud.subCategory}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="totalBudget">Total Budget</label>
+                                            <p>{{bud.totalBudget|currency}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="initialBudget">Initial Budget</label>
+                                            <p>{{bud.initialBudget|currency}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="spentBudget">Spent Budget</label><br>
+                                            <p>{{bud.spentBudget|currency}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="onholdBudget">OnHold Budget</label><br>
+                                            <p>{{bud.onHoldBudget|currency}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="remainingBudget">Remaining Budget</label><br>
+                                            <p>{{bud.remainingBudget|currency}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="budget && budget.length === 0">
+                    <div class="row rows">You don't have any budget category. Please add budget details</div>
+                </ng-container>
+                <!-- Final Total block -->
+                <div class="row budget-rows" *ngIf="budget && budget.length > 0">
+                    <div class="total-box">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <h4 class="total-color">Total</h4>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="totalBudget">Total Budget</label>
+                                    <h4 class="total-color">{{totalBudget | currency}}</h4>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="initialBudget">Initial Budget</label>
+                                    <h4 class="total-color">{{initialBudget | currency}}</h4>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="spentBudget">Spent Budget</label><br>
+                                    <h4 class="total-color">{{spentBudget | currency}}</h4>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="onholdBudget">OnHold Budget</label><br>
+                                    <h4 class="total-color">{{onHoldBudget | currency}}</h4>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="remainingBudget">Remaining Budget</label><br>
+                                    <h4 class="total-color">{{remainingBudget | currency}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Final Total block End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="loader===false">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body active-plan-details">
+                <div class="row">
+
+                    <div class="col-6 plan-header-spacing text-left">
+                        <h4>Manage Your Goals </h4>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a class="btn btn-outline-dark" [routerLink]="['/my-goal/find-track-goal']">
+                            Manage Goals</a>
+                    </div>
+                    <ng-container>
+                        <div class="row goal-rows" *ngIf="combinedGoals && combinedGoals.length === 0">You don't have any Goals added.
+                        </div>
+                        <div class="row goal-rows" *ngIf="combinedGoals && combinedGoals.length > 0">You have added {{combinedGoals.length}} {{(combinedGoals.length > 1 ? 'Goals' : 'Goal')}}.</div>
+                    </ng-container>
+
+                </div>
+                <!-- Final Total block End -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="loader===false">
+    <div class="col-lg-12 text-right rediect-buttons">
+        <button class="btn btn-primary" (click)="downloadPDF()">Download PDF</button>
+        <!-- <button class="btn btn-primary" [routerLink]="['/planparser/SearchProviders']" [hidden]="true">What kind of service provider you needs?</button>&nbsp; -->
+        <button type="submit" class="btn btn-primary" [routerLink]="['/planparser/Plan-Funded-Goals']">How does your
+            plan fund your Goals?</button>
+        <button type="submit" class="btn btn-primary" [routerLink]="['/planparser/Plan-Funded']">How is your plan
+            Funded?</button>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="loader" style="padding-top:25px">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

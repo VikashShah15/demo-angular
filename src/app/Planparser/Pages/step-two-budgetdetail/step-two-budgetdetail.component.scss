@@ -1,0 +1,96 @@
+.table th {
+    background-color: white;
+}
+
+.text-right {
+    float: right;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+.Invalid {
+    border-color: red;
+}
+
+.p-inputgroup-addon {
+    min-width: 0px;
+}
+
+span.spinner {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.spinner:before {
+    content: "";
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    -webkit-animation: spinner 0.8s linear infinite;
+    animation: spinner 0.8s linear infinite;
+    display: block;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.overflow-y {
+    overflow-y: hidden;
+}
+
+.width-1500 {
+    width: 1500px;
+}
+
+.error {
+    border: 1px red solid;
+    background: #ff00000f;
+}
+
+.div-table {
+    display: table;
+    width: auto;
+    background-color: white;
+    // border: 1px solid #666666;
+    border-spacing: 5px;
+    color: #696969;
+    border-top: 1px solid #e8ebf1;
+    /* cellspacing:poor IE support for  this */
+}
+
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+}
+
+.div-table-col {
+    float: left;
+    /* fix for  buggy browsers */
+    display: table-column;
+    width: 150px;
+    background-color: #ccc;
+}
+
+.margin {
+    margin-top: 40px;
+}
+
+.size {
+    font-size: 20px;
+}
+
+.btn-margin {
+    margin-right: 10px;
+}

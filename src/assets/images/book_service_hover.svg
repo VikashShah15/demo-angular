@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="book_service_hover" transform="translate(-6840 72)">
+    <rect id="Rectangle_40" data-name="Rectangle 40" width="20" height="20" transform="translate(6840 -72)" fill="none" opacity="0.242"/>
+    <path id="Path_83" data-name="Path 83" d="M294.43,216.581h-10.8a2.752,2.752,0,0,0-2.75,2.75v12a2.753,2.753,0,0,0,2.75,2.75h10.8a.75.75,0,0,0,.75-.75v-16A.75.75,0,0,0,294.43,216.581Zm-10.8,1.5h10.05v9.5l-10.142.005a3.076,3.076,0,0,0-1.158.388v-8.643A1.25,1.25,0,0,1,283.63,218.081Zm0,14.5a1.251,1.251,0,0,1-1.25-1.25v-.907a1.5,1.5,0,0,1,1.25-1.343h10.05v3.5Z" transform="translate(6562.12 -287.581)" fill="#db1b5d"/>
+  </g>
+</svg>

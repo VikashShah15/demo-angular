@@ -1,0 +1,57 @@
+<div class="main-wrapper">
+    <div class="page-wrapper full-page">
+        <div class="page-content d-flex align-items-center justify-content-center">
+            <div class="row w-100 mx-0 auth-page">
+                <div class="col-md-8 col-xl-6 mx-auto">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-12 pl-md-0">
+                                <div class="auth-form-wrapper px-4 py-5">
+                                    <a href="javascript:void(0);" class="noble-ui-logo d-block mb-2" style="width: 100px;"><img src="assets/images/angularlogo.png" /></a>
+                                    <h5 class="text-muted font-weight-normal mb-4">Welcome! Please enter your email to start signing up with us.</h5>
+                                    <form class="forms-sample" [formGroup]="registrationForm">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email Address</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" formControlName="email">
+                                            <span class="invalid" *ngIf="(registrationForm.controls.email.touched || isSubmitted)  && registrationForm.controls.email.errors?.required">
+                                                {{validationConstants.EmailAddressRequired}}
+                                            </span>
+                                            <span class="invalid" *ngIf="(registrationForm.controls.email.touched || isSubmitted)  && registrationForm.controls.email.errors?.pattern">
+                                                {{validationConstants.EmailPattern}}
+                                            </span>
+                                        </div>
+                                        <div class="form-group" style="display: flex;">
+                                            <p-checkbox binary="true" formControlName="terms"></p-checkbox>
+                                            <label class="lbl-details" style="margin:0 10px;"><span> I agree to the
+                                                    Cared Platform
+                                                    <a href="#"
+                                                        target="_blank">Terms and
+                                                        Conditions</a>
+                                                    and <a href="#"
+                                                        target="_blank">Privacy Policy</a>
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" (click)="userRegistration()">Sign up</button>
+                                        </div>
+
+                                        <div>
+                                            <a [routerLink]="['/authorize/forget-password']" class="d-block mt-3 text-muted" style="padding-top: 20px!important;">Forgot
+                                                Password?</a>
+                                            <a [routerLink]="['/authorize']" class="d-block mt-3 text-muted">Already a user?
+                                                Sign
+                                                in</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

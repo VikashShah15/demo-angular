@@ -1,0 +1,27 @@
+.p-checkbox-box,
+p-checkbox {
+    -ms-flex-align: center;
+    padding: 5px;
+    align-items: center;
+}
+
+.a-link-booknow {
+    color: #db1b5d;
+    margin-left: auto !important;
+    margin-right: 15px;
+}
+
+.pButton {
+    height: 30px;
+    width: 90px;
+    color: #fff;
+    background-color: #da1a5d;
+    border: 0;
+    opacity: 1;
+    margin-top: 10px;
+    border-radius: 0.1875rem;
+}
+
+.pButton:hover {
+    background-color: #ee1f67;
+}

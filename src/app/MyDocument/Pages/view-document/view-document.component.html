@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h3>View Document </h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body active-plan-details">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="name">Title</label><br>
+                            <p>
+                                {{documentDetails.title}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="name">Document Type</label><br>
+                            <p>
+                                {{fetchDocumentType(documentDetails.documentTypeId)}}
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="birthdate"> Start Date</label><br>
+                            <p>{{documentDetails.startDate|date:'dd-MM-yyyy' }}</p>
+                            <p *ngIf="documentDetails.startDate === null">NA</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="birthdate"> End Date</label><br>
+                            <p>{{documentDetails.endDate|date:'dd-MM-yyyy' }}</p>
+                            <p *ngIf="documentDetails.endDate === null">NA</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group buttonsize">
+                            <label class="p-col-56" for="birthdate"> File Size</label><br>
+                            <p>{{documentDetails.fileSize | formatFileSize }} </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="ndisnumber">Description</label>
+                            <p>{{documentDetails.description}}</p>
+                            <p *ngIf="documentDetails.description === null">NA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-right">
+        <button class="btn btn-primary" [hidden]="documentDetails.filePath == null"
+            (click)="downloadFile(documentDetails.filePath)"><i class="fa fa-download"></i> Download</button> &nbsp;
+        <button class="btn btn-light" [routerLink]="['/my-document']">Cancel</button> &nbsp;
+        <a class="btn btn-primary" [routerLink]="['/my-document', 'update-document', documentDetails.documentId]">
+            Edit </a>
+    </div>
+</div>

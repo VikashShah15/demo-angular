@@ -1,0 +1,99 @@
+<h4 class="margintop30" style="text-align: center;cursor: pointer;"> What kind of service providers do you need?
+</h4>
+<div class="container">
+    <ul class="support_box_3list" style="width:200%" *ngFor="let i of supportSubCategoryWithServiceProvider">
+        <li>
+            <div class="sb3l_title">{{i.supportCategory}}</div>
+
+            <ul class="sb3l_list">
+                <li>
+
+                </li>
+                <li>
+                    <p-checkbox [binary]="true"></p-checkbox>
+                    <label class="sb3l_cate"> <span>{{i.supportSubCategory}}</span></label>
+                    <ul class="sb3l_list">
+                        <li>
+                            {{i._source.RegisteredProviderName}}
+                            <a class="a-link-booknow">Book Now</a>
+                        </li>
+                        <!-- <li>
+                            Kelly, Ianna Jane
+                            <a class="a-link-booknow">Book Now</a>
+                        </li>
+                        <li>
+                            Keylinks Community Services Pty Ltd
+                            <a class="a-link-booknow">Book Now</a>
+                        </li> -->
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </li>
+    </ul>
+</div>
+
+<!-- <div class="container">
+    <ul class="support_box_3list" style="width:200%">
+        <li>
+            <div class="sb3l_title">Capacity Building</div>
+            <ul class="sb3l_list">
+                <li>
+                </li>
+                <li *ngFor="let c of CapacitySupportArray">
+                    <p-checkbox [binary]="true"></p-checkbox>
+                    <label class="sb3l_cate"> <span pTooltip="{{c.HoverDescription}}">
+                                {{c.SupportCategory}}</span></label>
+                    <ul class="sb3l_list">
+                        <li>
+                            Judith Groube Private Practice;
+                            <a class="a-link-booknow">Book Now</a> </li>
+                        <li>
+                            Kelly, Ianna Jane
+                            <a class="a-link-booknow">Book Now</a> </li>
+                        <li>
+                            Keylinks Community Services Pty Ltd
+                            <a class="a-link-booknow">Book Now</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+<div class="container">
+    <ul class="support_box_3list" style="width:200%">
+        <li>
+            <div class="sb3l_title">Capital Support</div>
+            <ul class="sb3l_list">
+                <li>
+                </li>
+                <li *ngFor="let c of CapitalSupportArray">
+                    <p-checkbox [binary]="true"></p-checkbox>
+                    <label class="sb3l_cate"> <span pTooltip="{{c.HoverDescription}}"> {{c.SupportCategory}} </span>
+                        </label>
+                    <ul class="sb3l_list">
+                        <li>
+                            Judith Groube Private Practice;
+                            <a class="a-link-booknow">Book Now</a> </li>
+                        <li>
+                            Kelly, Ianna Jane
+                            <a class="a-link-booknow">Book Now</a> </li>
+                        <li>
+                            Keylinks Community Services Pty Ltd
+                            <a class="a-link-booknow">Book Now</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div> -->
+<div class="container">
+    <div style="width: 100px;">
+        <button class="btn btn-primary" [routerLink]="['/planparser/']">Back</button>
+    </div>
+</div>
+<!-- <app-comming-soon></app-comming-soon> -->

@@ -1,0 +1,15 @@
+.pButton {
+    height: 30px;
+    width: 90px;
+    color: #fff;
+    background-color: rgb(196, 18, 47);
+    border-color: rgb(196, 18, 47);
+    opacity: 0.8;
+    border-radius: 0.1875rem;
+    margin-top: 10px;
+    /* border-radius: 3px; */
+}
+
+.pButton:hover {
+    opacity: 1;
+}

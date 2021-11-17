@@ -1,0 +1,62 @@
+.padding-card {
+    padding: 25px;
+}
+
+.graph-section {
+    min-height: 340px;
+    justify-content: center;
+}
+
+.padding-chart {
+    padding: 25px;
+}
+
+.startdate-enddate-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    float: left;
+}
+
+.chart-date-box {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.spiner-overly {
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    left: 0;
+    height: 100%;
+    float: left;
+    position: absolute;
+    background: #000;
+    opacity: 0.25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid #13213D;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border .75s linear infinite;
+    color: #13213D;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.a-color {
+    color: #13213d;
+}

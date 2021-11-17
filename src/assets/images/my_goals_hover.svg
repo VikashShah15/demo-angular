@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="my_goals_hover" transform="translate(-6841 -34)">
+    <rect id="Rectangle_47" data-name="Rectangle 47" width="20" height="20" transform="translate(6841 34)" fill="none" opacity="0.242"/>
+    <g id="target" transform="translate(6577.727 -221.581)">
+      <g id="Ellipse_5" data-name="Ellipse 5">
+        <path id="Path_88" data-name="Path 88" d="M273.023,274.081a8.75,8.75,0,1,1,8.75-8.75A8.76,8.76,0,0,1,273.023,274.081Zm0-16a7.25,7.25,0,1,0,7.25,7.25A7.258,7.258,0,0,0,273.023,258.081Z" fill="#db1b5d"/>
+      </g>
+      <g id="Ellipse_6" data-name="Ellipse 6">
+        <path id="Path_89" data-name="Path 89" d="M273.023,270.881a5.551,5.551,0,1,1,5.551-5.55A5.555,5.555,0,0,1,273.023,270.881Zm0-9.6a4.051,4.051,0,1,0,4.051,4.051A4.055,4.055,0,0,0,273.023,261.28Z" fill="#db1b5d"/>
+      </g>
+      <g id="Ellipse_7" data-name="Ellipse 7">
+        <path id="Path_90" data-name="Path 90" d="M273.023,267.681a2.35,2.35,0,1,1,2.351-2.35A2.352,2.352,0,0,1,273.023,267.681Zm0-3.2a.85.85,0,1,0,.851.851A.851.851,0,0,0,273.023,264.48Z" fill="#db1b5d"/>
+      </g>
+    </g>
+  </g>
+</svg>

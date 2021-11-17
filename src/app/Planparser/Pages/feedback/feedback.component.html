@@ -1,0 +1,67 @@
+<div class="av_textblock_section margintop20" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+    <div class="container">
+        <div class="avia_textblock  av_inherit_color  av-medium-font-size-overwrite av-medium-font-size-21 av-small-font-size-overwrite av-small-font-size-21 av-mini-font-size-overwrite av-mini-font-size-18" style="font-size:21px; color:#58595b; " itemprop="text">
+            <p style="text-align: center;">
+                Thank you for using Cared Plan Parser. We are analysing your details to generate a report which will help you understand your plan.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="avia_codeblock_section  avia_code_block_0 " itemscope="itemscope">
+    <div class="avia_codeblock " itemprop="text">
+        <main class="feedback_bar" style="min-height: 10px !important;">
+            <div class="container">
+                <div id="wizard_container" style="min-height: 10px !important;" class="wizard" novalidate="novalidate">
+                    <form [formGroup]="feedbackForm" class="wizard-form">
+                        <input id="website" name="website" type="text" value="" style="display: none;">
+                        <div id="middle-wizard" class="wizard-branch wizard-wrapper">
+                            <div class="submit step wizard-step current" style="display: block;">
+                                <div class="question_title">
+                                    <h5 class="wizard-header">Please provide your feedback on using Cared Plan Parser.
+                                    </h5>
+                                </div>
+                                <ul class="rating-list">
+                                    <li *ngFor="let f of feedback">
+                                        <div class="item" id="item1">
+                                            <input id="answer_1_group_15" type="radio" name="answer_group_15" [value]="f" class="required" formControlName="rating" name="rating">
+                                            <label for="answer_1_group_15"><strong>{{f}}</strong></label> <br>
+                                            <span class="invalid" *ngIf="(feedbackForm.controls.rating.touched || isSubmitted) && feedbackForm.controls.rating.errors?.required">
+                                                Feedback is Mandatory.
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- <div class="row justify-content-center">
+                                    <div class="col-lg-1" *ngFor="let f of feedback">
+                                        <div class="item" id="item1">
+                                            <input id="answer_1_group_15" type="radio" name="answer_group_15"
+                                                [value]="f" class="required" formControlName="rating" name="rating">
+                                            <label for="answer_1_group_15"><strong>{{f}}</strong></label> <br>
+                                            <span class="invalid"
+                                                *ngIf="(feedbackForm.controls.rating.touched || isSubmitted) && feedbackForm.controls.rating.errors?.required">
+                                                Feedback is Mandatory.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- /row-->
+                            </div>
+                        </div>
+                        <!-- /Last step ============================== -->
+                        <div id="bottom-wizard">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4" style="text-align: center;">
+                                <button type="submit" name="process" class="pButton" (click)="giveFeedback()" [disabled]="!feedbackForm.valid">Submit</button>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                        <!-- /bottom-wizard -->
+                    </form>
+                </div>
+                <!-- /Wizard container -->
+            </div>
+            <!-- /Container -->
+        </main>
+        <!-- /main -->
+    </div>
+</div>

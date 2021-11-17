@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-6 plan-header-spacing">
+        <h3>View Goals</h3>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-dark" [routerLink]="['/my-goal/add-goal']">Add Goal</a>
+    </div>
+</div>
+<div class="row" *ngIf="combinedGoals && combinedGoals.length === 0">
+    <div class="col-lg-12 grid-margin stretch-card" style="align-items: center;">
+        <div class="card overflow-y">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="text-center">
+                                You don't have any Goals added.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngFor="let goal of combinedGoals; let i = index">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card overflow-y">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>
+                                My Goal {{i + 1}}/{{combinedGoals.length}}
+                            </h4>
+                        </div>
+                        <div class="col-6 text-right row-options">
+                            <a href="javascript:void(0);"><i class="fa fa-edit"
+                                    [routerLink]="['/my-goal/update-goal', goal.goalId]"></i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-trash"
+                                    (click)="deleteGoalData(goal.goalId)"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="GoalType">Goal Type</label>
+                            <h4>
+                                {{fetchGoalType(goal.goalTypeId)}}
+                            </h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Track Goals</label>
+                            <p>
+                                <a href="javascript:void(0);" [routerLink]="['/my-goal/track-my-goal', goal.goalId]">Click here to track this
+                                    goal</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Relates To</label>
+                            <p>
+                                {{fetchGoalRelatesType(goal.goalRelatesToId)}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Details</label>
+                            <p>
+                                {{goal.description}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>How is this achieved?</label>
+                            <p>
+                                {{goal.achievementMethod}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>How is this supported?</label>
+                            <p>
+                                {{goal.fundingSource}}
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

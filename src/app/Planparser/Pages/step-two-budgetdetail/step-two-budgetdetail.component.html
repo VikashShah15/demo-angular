@@ -1,0 +1,147 @@
+<div class="row" *ngIf="Loader===false">
+    <div class="col-lg-12">
+        <div class="plan-header-spacing">
+            <h4 *ngIf="returnUrl === undefined || returnUrl === null">Step 2/{{step}} </h4>
+        </div>
+    </div>
+    <div class="col-6 plan-header-spacing">
+        <h3>{{budgetDetailsTitle}} </h3>
+    </div>
+    <div class="col-6 text-right ">
+        <a class="btn btn-dark " style="color:#fff" (click)="addNewBudget()"><i class="fa fa-plus-circle"
+                aria-hidden="true"></i> Add Budget</a>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="Loader===false">
+    <form class="forms-sample" [formGroup]="budgetForm" *ngIf="budgetForm!=undefined" style="width: 100%;">
+        <div class="col-lg-12 grid-margin stretch-card" formArrayName="details" *ngFor="let field of budgetForm.get('details')['controls']; let ind = index;">
+            <div class="card overflow-y" [formGroupName]="ind">
+                <div class="card-body" [ngStyle]="{'border': (field.value.isConfirmed) ? '1px solid green' : '1px solid red'}">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="name">SUPPORT GROUP</label>
+                                <select class="form-control" formControlName="category" (change)="onCategoryChange($event,ind)" [ngClass]="{'error': field.get('category').errors}">
+                                    <option value=""></option>
+                                    <option *ngFor="let i of category" [value]="i.supportCategoryId">{{i.title}}
+                                    </option>
+                                </select>
+                                <span class="invalid" *ngIf="(field.get('category').touched || isSubmitted) && field.get('category').errors?.required">{{validationConstants.CategoryRequired}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="name">CATEGORY</label>
+                                <select class="form-control" formControlName="supportSubCategoryId" [ngClass]="{'error': (field.get('supportSubCategoryId').errors) || (sameValueError(field.controls.supportSubCategoryId.value, ind) && ind > -1)}">
+                                    <option value=""></option>
+                                    <option *ngFor="let i of formSupportSubCategories[ind]"
+                                        [value]="i.supportSubCategoryId">{{i.title}}</option>
+                                </select>
+                                <span class="invalid" *ngIf="(field.get('supportSubCategoryId').touched || isSubmitted) && field.get('supportSubCategoryId').errors?.required">{{validationConstants.SubCategoryRequired}}</span>
+                                <span class="invalid" *ngIf="sameValueError(field.controls.supportSubCategoryId.value, ind)">{{validationConstants.SameCategoryError}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="name">TYPE</label>
+                                <select class="form-control" formControlName="planTypeId" [ngClass]="{'error': field.get('planTypeId').errors}">
+                                    <option value=""></option>
+                                    <option *ngFor="let j of planType" [value]="j.planTypeId">{{j.title}}</option>
+                                </select>
+                                <span class="invalid" *ngIf="(field.get('planTypeId').touched || isSubmitted) && field.get('planTypeId').errors?.required">{{validationConstants.PlanTypeRequired}}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="budget">TOTAL BUDGET</label>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">$</span>
+                                    <input class="form-control" type="number" formControlName="totalBudget" [ngClass]="{'error': (field.get('totalBudget').errors) || (totalBudgetValue(field.controls.totalBudget.value,field.controls.spentBudget.value,field.controls.onholdBudget.value)) || (changeBudgetValue(field.controls.totalBudget.value,field.controls.initialBudget.value,field.controls.spentBudget.value,field.controls.onholdBudget.value))}">
+                                </div>
+                                <span class="invalid" *ngIf="(field.get('totalBudget').touched || isSubmitted) && field.get('totalBudget').errors?.required">{{validationConstants.BudgetRsRequired}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="budget">INITIAL BUDGET</label>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">$</span>
+                                    <input class="form-control" type="number" formControlName="initialBudget" [ngClass]="{'error': field.get('initialBudget').errors || (changeBudgetValue(field.controls.totalBudget.value,field.controls.initialBudget.value,field.controls.spentBudget.value,field.controls.onholdBudget.value))}">
+
+                                </div>
+                                <span class="invalid" *ngIf="(field.get('initialBudget').touched || isSubmitted) && field.get('initialBudget').errors?.required">{{validationConstants.InitialBudgetRsRequired}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="budget">SPENT BUDGET</label>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">$</span>
+                                    <input class="form-control" type="number" [attr.disabled]="field.get('isEditable').value===true && budgetDetailsTitle==='Edit Your Budgets' ? 'disabled' :null" formControlName="spentBudget" [ngClass]="{'error': (field.get('spentBudget').errors)}">
+
+                                </div>
+                                <span class="invalid" *ngIf="(field.get('spentBudget').touched || isSubmitted) && field.get('spentBudget').errors?.required">{{validationConstants.SpentBudgetRequired}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="budget">ONHOLD BUDGET</label>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">$</span>
+                                    <input class="form-control" type="number" formControlName="onholdBudget" [attr.disabled]="field.get('isEditable').value===true && budgetDetailsTitle==='Edit Your Budgets' ? 'disabled' :null" [ngClass]="{'error': (field.get('onholdBudget').errors)}">
+
+                                </div>
+                                <span class="invalid" *ngIf="(field.get('onholdBudget').touched || isSubmitted) && field.get('onholdBudget').errors?.required">{{validationConstants.OnHoldBudgetRequired}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+
+                            <span class="invalid" *ngIf="changeBudgetValue(field.controls.totalBudget.value,field.controls.initialBudget.value,field.controls.spentBudget.value,field.controls.onholdBudget.value)">Your
+                                budget allocation are not totalling. Please check the 'red highlighted boxes and try
+                                again.</span>
+
+                        </div>
+
+                        <div class="col-lg-3 size text-right">
+
+
+                            <button class="btn btn-light btn-margin" (click)="deleteBudgetData(field.value.budgetId, ind)">Delete</button>
+                            <button *ngIf="!field.value.isConfirmed && field.value.budgetId" class="btn btn-primary" (click)="confirmBudgetData(field.value.budgetId,ind)">Confirm</button>
+                            <button *ngIf="field.value.isConfirmed" class="btn btn-primary" [ngStyle]="{'background-color': (field.value.isConfirmed) ? '#13213D' : '#da1a5d'}" (click)="confirmBudgetData(field.value.budgetId,ind)">Confirmed</button>
+                            <button *ngIf="!field.value.budgetId" class="btn btn-primary" (click)="confirmBudgetData(field.value.budgetId,ind)">Save</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <app-validation-summary [form]="budgetForm"></app-validation-summary> -->
+        </div>
+    </form>
+</div>
+
+
+<div class="row" *ngIf="Loader===false">
+    <div class="col-lg-12 text-right">
+        <button class="btn btn-light" [routerLink]="['/planparser/step-one-plandetail', planId]">Previous</button> &nbsp;
+        <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="budgetFormSubmit()">
+            Save & Continue <span [ngClass]="{'spinner':loading===true}"></span></button>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="Loader" style="padding-top:25px">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-right"></p-toast>
